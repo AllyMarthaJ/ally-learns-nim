@@ -6,12 +6,12 @@ const WHITE = rgb(255, 255, 255).asRgbx
 
 type
     GraphOpts* = object
-        xMin*, xMax*, yMin*, yMax*, threshold*, maybeThreshold*, subdivisions*: float
-        width*, height*: int
+        xMin*, xMax*, yMin*, yMax*, threshold*, maybeThreshold*: float
+        width*, height*, subdivisions*: int
 
 const GRAPH_FN_NAME* = "(y - sin(x)) * (max(|x + y| + |x - y| - 1, 0) + max(0.25 - x^2 - y^2, 0)) = 0"
 proc graphFn(x: float, y: float): float =
-    return y-x
+    return (y-sin(x))*(max(abs(x+y)+abs(x-y)-1,0)+max(0.25-x^2-y^2,0))
 
 proc subpixelMatch(x: float, y: float, xInc: float, yInc: float, threshold: float, maybeThreshold: float, subdivisions: int): bool =
     let val = abs(graphFn(x, y))
@@ -49,6 +49,7 @@ proc generateImage*(opts: GraphOpts): Image =
 
     let threshold = opts.threshold
     let maybeThreshold = opts.maybeThreshold
+    let subdivisions = opts.subdivisions
     let xMin = opts.xMin
     let width = opts.width
 
@@ -56,7 +57,7 @@ proc generateImage*(opts: GraphOpts): Image =
     var y = opts.yMax
 
     for offset in countup(0, size - 1):
-        image.data[offset] = case subpixelMatch(x, y, xInc, yInc, threshold, maybeThreshold, 10)
+        image.data[offset] = case subpixelMatch(x, y, xInc, yInc, threshold, maybeThreshold, subdivisions)
             of true: BLACK
             else: WHITE
 
