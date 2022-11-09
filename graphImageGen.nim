@@ -14,12 +14,12 @@ proc graphFn(x: float, y: float): float =
     return y-x
 
 proc subpixelMatch(x: float, y: float, xInc: float, yInc: float, threshold: float, maybeThreshold: float, subdivisions: int): bool =
-    let val = graphFn(x, y)
+    let val = abs(graphFn(x, y))
 
-    if abs(val) <= threshold:
+    if val <= threshold:
         return true
 
-    if abs(val) > maybeThreshold or subdivisions == 0:
+    if subdivisions == 0 or val > maybeThreshold:
         return false
 
     let uInc: float = xInc / subdivisions.float
