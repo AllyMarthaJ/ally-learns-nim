@@ -8,30 +8,36 @@ const Y_MAX: float = 1
 const BLACK = rgb(0, 0, 0).asRgbx
 const WHITE = rgb(255, 255, 255).asRgbx
 
-proc functionImage*(width: int, height: int): seq[int] =
-    var size = width * height
-    var image = newSeq[int](size)
+const THRESHOLD: float = 10.float.pow(-4)
+const MAYBE_THRESHOLD: float = 10.float.pow(-1)
 
-    let xInc: float = (X_MAX - X_MIN) / width.float
-    let yInc: float = (Y_MAX - Y_MIN) / height.float
+proc fn(x: float, y: float): float =
+    return (y-sin(x))*(max(abs(x+y)+abs(x-y)-1,0)+max(0.25-x^2-y^2,0))
 
-    var x = X_MIN
-    var y = Y_MIN
+proc subpixelMatch(x: float, y: float, xInc: float, yInc: float, subdivisions: int): bool =
+    if abs(fn(x, y)) <= THRESHOLD:
+        return true
 
-    for tmpX in countup(0, width - 1):
-        y = Y_MAX
+    if abs(fn(x, y)) > MAYBE_THRESHOLD:
+        return false
 
-        for tmpY in countup(0, height - 1):
-            let offset = tmpY * width + tmpX
+    let uInc: float = xInc / subdivisions.float
+    let vInc: float = yInc / subdivisions.float
 
-            image[offset] = case abs(y - x) <= 0.01
-                of true: 1
-                else: 0
-            y -= yInc
+    var u = x
+    var v = y + yInc
 
-        x += xInc
+    for offset in countup(0, subdivisions ^ 2 - 1):
+        if abs(fn(u, v)) <= THRESHOLD:
+            return true
 
-    return image
+        if offset mod subdivisions == 0:
+            v -= vInc
+            u = x
+
+        u += uInc
+
+    return false
 
 proc generateImage*(width: int, height: int): Image =
     var image = newImage(width, height)
@@ -44,7 +50,7 @@ proc generateImage*(width: int, height: int): Image =
     var y = Y_MAX
 
     for offset in countup(0, size - 1):
-        image.data[offset] = case abs((y-sin(x))*(max(abs(x+y)+abs(x-y)-1,0)+max(0.25-x^2-y^2,0))) <= 0.01
+        image.data[offset] = case subpixelMatch(x, y, xInc, yInc, 10)
                 of true: BLACK
                 else: WHITE
 
