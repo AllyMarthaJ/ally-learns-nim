@@ -1,4 +1,5 @@
-import times, sugar, strformat, graphImageGen, graphConstants, sequtils, stats, math
+import generator, constants
+import times, sugar, strformat, sequtils, stats, math
 
 type
     GenResult = object
