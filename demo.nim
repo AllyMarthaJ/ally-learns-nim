@@ -1,5 +1,5 @@
 import times, pixie, os
-import graphConstants, benchmark, graphImageGen
+import constants, benchmark, generator
 
 benchmarkGraphResolution()
 

@@ -1,5 +1,6 @@
 
-import math, pixie, graphConstants
+import math, pixie
+import constants
 
 const BLACK = rgb(0, 0, 0).asRgbx
 const WHITE = rgb(255, 255, 255).asRgbx
