@@ -47,23 +47,17 @@ proc generateImage*(opts: GraphOpts): Image =
     let xInc: float = (opts.xMax - opts.xMin) / opts.width.float
     let yInc: float = (opts.yMax - opts.yMin) / opts.height.float
 
-    let threshold = opts.threshold
-    let maybeThreshold = opts.maybeThreshold
-    let subdivisions = opts.subdivisions
-    let xMin = opts.xMin
-    let width = opts.width
-
     var x = opts.xMin
     var y = opts.yMax
 
     for offset in countup(0, size - 1):
-        image.data[offset] = case subpixelMatch(x, y, xInc, yInc, threshold, maybeThreshold, subdivisions)
+        image.data[offset] = case subpixelMatch(x, y, xInc, yInc, opts.threshold, opts.maybeThreshold, opts.subdivisions)
             of true: BLACK
             else: WHITE
 
-        if offset mod width == 0:
+        if offset mod opts.width == 0:
             y -= yInc
-            x = xMin
+            x = opts.xMin
 
         x += xInc
 
