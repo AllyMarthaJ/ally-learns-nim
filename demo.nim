@@ -82,7 +82,7 @@ proc testFunctionImage =
 
 # testFunctionImage()
 let t0 = getTime()
-let image = generateImage(1024, 1024)
+let image = generateImage(2048, 2048)
 let delta = (getTime() - t0).inMilliseconds
 
 echo "Wrote image in ", delta, " ms."
