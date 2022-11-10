@@ -19,7 +19,6 @@ var parser = newParser:
         option("-o", "--output", "File name of the output image", some("output.png"))
         flag("-p", "--showProgress", false, "Show the progress of the generation")
         run:
-            let t0 = getTime()
             let o = GraphOpts(xMin : parseFloat(opts.xmin),
                                 xMax : parseFloat(opts.xmax),
                                 yMin : parseFloat(opts.ymin),
@@ -32,9 +31,6 @@ var parser = newParser:
                                 showProgress : opts.showProgress)
 
             let image = generateImage(o)
-            let delta = (getTime() - t0).inMilliseconds
-
-            echo "Generated image in ", delta, " ms."
 
             image.writeFile(opts.output)
             discard execShellCmd(fmt"open {opts.output}")

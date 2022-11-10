@@ -1,5 +1,5 @@
 
-import math, pixie, progress
+import math, pixie, suru
 import constants
 
 const BLACK = rgb(0, 0, 0).asRgbx
@@ -48,9 +48,11 @@ proc generateImage*(opts: GraphOpts): Image =
     var x = opts.xMin
     var y = opts.yMax
 
-    var bar = newProgressBar(size, opts.width)
+    var bar = initSuruBar()
+    bar[0].total = size
+
     if opts.showProgress:
-        bar.start()
+        bar.setup()
 
     for offset in countup(0, size - 1):
         image.data[offset] = case subpixelMatch(x, y, xInc, yInc, opts.threshold, opts.maybeThreshold, opts.subdivisions)
@@ -61,7 +63,8 @@ proc generateImage*(opts: GraphOpts): Image =
             y -= yInc
             x = opts.xMin
             if opts.showProgress:
-                bar.increment()
+                bar.inc(opts.width)
+                bar.update
 
         x += xInc
 
