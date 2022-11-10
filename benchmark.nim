@@ -51,8 +51,7 @@ proc resolutionGenerator(iteration: int): GenResult =
             maybeThreshold : MAYBE_THRESHOLD,
             subdivisions : 0,
             width : 2^iteration,
-            height : 2^iteration,
-            showProgress : true
+            height : 2^iteration
         )
     )
 
