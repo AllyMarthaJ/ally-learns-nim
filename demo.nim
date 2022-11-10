@@ -52,7 +52,13 @@ var parser = newParser:
                                 height : parseInt(opts.height),
                                 showProgress : opts.showProgress)
 
+            let t0 = getTime()
+
             let image = generateImage(o)
+
+            let delta = (getTime() - t0).inMilliseconds
+            if not opts.showProgress:
+                echo "Finished rendering image in ", delta, " ms."
 
             image.writeFile(opts.output)
             discard execShellCmd(fmt"open {opts.output}")

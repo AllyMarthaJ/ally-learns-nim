@@ -70,5 +70,6 @@ proc generateImage*(opts: GraphOpts): Image =
 
     if opts.showProgress:
         bar.finish()
+        echo "Finished rendering image in ", bar[0].elapsed * 1000, " ms."
 
     return image
