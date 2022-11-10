@@ -72,11 +72,13 @@ proc processRow(data: ThreadData) =
 
         x += info.xInc
 
-proc generateImageThreaded*(opts: GraphOpts, tc: int = 10): Image =
+proc generateImageThreaded*(opts: GraphOpts, tc: int = 24): Image =
     var image = newImage(opts.width, opts.height)
     let imageAddr = image.addr
 
     let threadCount = min(tc, opts.height)
+    let threadSize = opts.height.div(threadCount)
+    let remaining = opts.height - threadSize * threadCount
 
     let size = opts.width * opts.height
     let xInc: float = (opts.xMax - opts.xMin) / opts.width.float
@@ -91,23 +93,39 @@ proc generateImageThreaded*(opts: GraphOpts, tc: int = 10): Image =
         bar.setup()
 
     var threads: seq[Thread[ThreadData]]
-    newSeq(threads, opts.height)
+    newSeq(threads, threadCount + 1)
 
-    for offsetY in 0 ..< opts.height:
+    for thread in 0 ..< threadCount:
         let data = ThreadData(
             xMin: opts.xMin,
             yMax: y,
             xInc: xInc,
             yInc: yInc,
-            offsetStart: offsetY * opts.width,
-            offsetEnd: (offsetY + 1) * opts.width,
+            offsetStart: thread * threadSize * opts.width,
+            offsetEnd: (thread + 1) * threadSize * opts.width,
             opts: opts,
             imageAddr: imageAddr,
             bar: bar
         )
 
-        threads[offsetY].createThread(processRow, data)
-        y -= yInc
+        threads[thread].createThread(processRow, data)
+        y -= threadSize.float * yInc
+
+    if remaining > 0:
+        let data = ThreadData(
+            xMin: opts.xMin,
+            yMax: y,
+            xInc: xInc,
+            yInc: yInc,
+            offsetStart: threadCount * threadSize * opts.width,
+            offsetEnd: opts.width * opts.height,
+            opts: opts,
+            imageAddr: imageAddr,
+            bar: bar
+        )
+
+        threads[threadCount].createThread(processRow, data)
+        y -= threadSize.float * yInc
 
     joinThreads(threads)
 
