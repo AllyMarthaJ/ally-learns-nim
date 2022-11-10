@@ -19,6 +19,8 @@
 # In general:
 #   If you lower the threshold, up the subdivisions.
 #   If you up the maybeThreshold, lower the subdivisions.
+#   If you decrease the resolution, up the subdivisions or lower the maybeThreshold.
+#   I think... X * resolution -> subdivisions / X
 #   A difference of 10^2 or 10^3 between threshold and maybeThreshold should be sufficient.
 
 import times, pixie, os, argparse, strformat

@@ -1,0 +1,185 @@
+total executions of each stack trace:
+Entry: 1/54 Calls: 15019/30755 = 48.83% [sum: 15019; 15019/30755 = 48.83%]
+  /Users/allymcdonald/Home/Nim projects/constants.nim: graphFn 20745/30755 = 67.45%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: subpixelMatch 30100/30755 = 97.87%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 2/54 Calls: 6267/30755 = 20.38% [sum: 21286; 21286/30755 = 69.21%]
+  /Users/allymcdonald/Home/Nim projects/generator.nim: subpixelMatch 30100/30755 = 97.87%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 3/54 Calls: 5726/30755 = 18.62% [sum: 27012; 27012/30755 = 87.83%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/pure/math.nim: ^ 5726/30755 = 18.62%
+  /Users/allymcdonald/Home/Nim projects/constants.nim: graphFn 20745/30755 = 67.45%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: subpixelMatch 30100/30755 = 97.87%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 4/54 Calls: 3049/30755 = 9.91% [sum: 30061; 30061/30755 = 97.74%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system.nim: += 3106/30755 = 10.10%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: subpixelMatch 30100/30755 = 97.87%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 5/54 Calls: 291/30755 = 0.95% [sum: 30352; 30352/30755 = 98.69%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system/iterators_1.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: encodeImage 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: writeFile 506/30755 = 1.65%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 6/54 Calls: 99/30755 = 0.32% [sum: 30451; 30451/30755 = 99.01%]
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/internal.nim: read64 99/30755 = 0.32%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/internal.nim: determineMatchLength 128/30755 = 0.42%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/snappy.nim: encodeFragment 131/30755 = 0.43%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/snappy.nim: encodeSnappy 131/30755 = 0.43%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/deflate.nim: deflate 143/30755 = 0.46%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: encodeImage 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: writeFile 506/30755 = 1.65%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 7/54 Calls: 60/30755 = 0.20% [sum: 30511; 30511/30755 = 99.21%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system/iterators_1.nim: toStraightAlpha 60/30755 = 0.20%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: encodeImage 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: writeFile 506/30755 = 1.65%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 8/54 Calls: 57/30755 = 0.19% [sum: 30568; 30568/30755 = 99.39%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system.nim: += 3106/30755 = 10.10%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 9/54 Calls: 54/30755 = 0.18% [sum: 30622; 30622/30755 = 99.57%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system/iterators_1.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 10/54 Calls: 39/30755 = 0.13% [sum: 30661; 30661/30755 = 99.69%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system.nim: -= 39/30755 = 0.13%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: subpixelMatch 30100/30755 = 97.87%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 11/54 Calls: 29/30755 = 0.09% [sum: 30690; 30690/30755 = 99.79%]
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/internal.nim: determineMatchLength 128/30755 = 0.42%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/snappy.nim: encodeFragment 131/30755 = 0.43%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/snappy.nim: encodeSnappy 131/30755 = 0.43%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/deflate.nim: deflate 143/30755 = 0.46%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: encodeImage 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: writeFile 506/30755 = 1.65%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 12/54 Calls: 12/30755 = 0.04% [sum: 30702; 30702/30755 = 99.83%]
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/adler32_simd.nim: adler32_ssse3 12/30755 = 0.04%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/adler32.nim: adler32 12/30755 = 0.04%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: encodeImage 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: writeFile 506/30755 = 1.65%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 13/54 Calls: 5/30755 = 0.02% [sum: 30707; 30707/30755 = 99.84%]
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/internal.nim: write64 5/30755 = 0.02%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/bitstreams.nim: addBits 10/30755 = 0.03%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/deflate.nim: deflate 143/30755 = 0.46%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: encodeImage 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: writeFile 506/30755 = 1.65%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 14/54 Calls: 4/30755 = 0.01% [sum: 30711; 30711/30755 = 99.86%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system/iterators_1.nim: barDisplay 5/30755 = 0.02%
+  /Users/allymcdonald/.nimble/pkgs/suru-0.3.1/suru/fractional_bar.nim: barDisplay 5/30755 = 0.02%
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/core/macros.nim: format 27/30755 = 0.09%
+  /Users/allymcdonald/.nimble/pkgs/suru-0.3.1/suru.nim: $ 29/30755 = 0.09%
+  /Users/allymcdonald/.nimble/pkgs/suru-0.3.1/suru.nim: show 36/30755 = 0.12%
+  /Users/allymcdonald/.nimble/pkgs/suru-0.3.1/suru.nim: update 36/30755 = 0.12%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 15/54 Calls: 3/30755 = 0.01% [sum: 30714; 30714/30755 = 99.87%]
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/internal.nim: read32 5/30755 = 0.02%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/bitstreams.nim: addBits 10/30755 = 0.03%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/deflate.nim: deflate 143/30755 = 0.46%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: encodeImage 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: writeFile 506/30755 = 1.65%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 16/54 Calls: 2/30755 = 0.01% [sum: 30716; 30716/30755 = 99.87%]
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system/comparisons.nim: <=% 13/30755 = 0.04%
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/system/gc.nim: newObjNoInit 14/30755 = 0.05%
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/pure/strformat.nim: formatValue 17/30755 = 0.06%
+  /Users/allymcdonald/.nimble/pkgs/suru-0.3.1/suru/common_displays.nim: progressDisplay 4/30755 = 0.01%
+  /Users/allymcdonald/.choosenim/toolchains/nim-1.6.8/lib/core/macros.nim: format 27/30755 = 0.09%
+  /Users/allymcdonald/.nimble/pkgs/suru-0.3.1/suru.nim: $ 29/30755 = 0.09%
+  /Users/allymcdonald/.nimble/pkgs/suru-0.3.1/suru.nim: show 36/30755 = 0.12%
+  /Users/allymcdonald/.nimble/pkgs/suru-0.3.1/suru.nim: update 36/30755 = 0.12%
+  /Users/allymcdonald/Home/Nim projects/generator.nim: generateImage 30248/30755 = 98.35%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
+Entry: 17/54 Calls: 2/30755 = 0.01% [sum: 30718; 30718/30755 = 99.88%]
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/internal.nim: read32 5/30755 = 0.02%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/snappy.nim: encodeFragment 131/30755 = 0.43%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/snappy.nim: encodeSnappy 131/30755 = 0.43%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy/deflate.nim: deflate 143/30755 = 0.46%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/zippy-0.10.4/zippy.nim: compress 155/30755 = 0.50%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie/fileformats/png.nim: encodePng 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: encodeImage 506/30755 = 1.65%
+  /Users/allymcdonald/.nimble/pkgs/pixie-5.0.1/pixie.nim: writeFile 506/30755 = 1.65%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: :anonymous 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: parse 30754/30755 = 100.00%
+  /Users/allymcdonald/.nimble/pkgs/argparse-3.0.0/argparse/backend.nim: run 30754/30755 = 100.00%
+  /Users/allymcdonald/Home/Nim projects/demo.nim: demo 30754/30755 = 100.00%
