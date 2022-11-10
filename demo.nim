@@ -1,6 +1,26 @@
 # nimble install pixie
 # nimble install argparse
 
+# Graphing program parameters.
+# Subdivision algorithm brought to you by Bunny https://github.com/Ebony-Ayers
+# The x, X, y, Y, w, h, o, p parameters are fairly explanatory.
+# So why do we care about a 'threshold' and 'maybeThreshold' and 'subdivisions'?
+# And how the heck does resolution affect it?
+# Off the bat: Higher the resolution, the more details you can trick a person into
+# thinking exist on the picture. It also increases the time take to render the image.
+# The threshold determines the overall accuracy of the image. The bulk of the pixels
+# rendered will be caught by this threshold (i.e. abs(fn)<=threshold).
+# The lower the threshold, the fewer pixels rendered. This can create a rather choppy
+# effect. This is where maybeThreshold comes in: a value which is higher than threshold,
+# but if it is met, it will subdivide the area around the pixel in question, and then
+# do the standard threshold comparison. (Hence where subdivisions come in)
+# This is the most time consuming part; the more subdivisions and higher the maybeThreshold,
+# the more pixel checking you have to do.
+# In general:
+#   If you lower the threshold, up the subdivisions.
+#   If you up the maybeThreshold, lower the subdivisions.
+#   A difference of 10^2 or 10^3 between threshold and maybeThreshold should be sufficient.
+
 import times, pixie, os, argparse, strformat
 import constants, benchmark, generator
 

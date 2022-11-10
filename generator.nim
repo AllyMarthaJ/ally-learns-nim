@@ -26,7 +26,7 @@ proc subpixelMatch(x: float, y: float, xInc: float, yInc: float, threshold: floa
     var u = x
     var v = y + yInc
 
-    for offset in countup(0, subdivisions ^ 2 - 1):
+    for offset in 0 ..< subdivisions^2:
         if abs(graphFn(u, v)) <= threshold:
             return true
 
@@ -54,7 +54,7 @@ proc generateImage*(opts: GraphOpts): Image =
     if opts.showProgress:
         bar.setup()
 
-    for offset in countup(0, size - 1):
+    for offset in 0 ..< size:
         image.data[offset] = case subpixelMatch(x, y, xInc, yInc, opts.threshold, opts.maybeThreshold, opts.subdivisions)
             of true: BLACK
             else: WHITE
@@ -63,7 +63,7 @@ proc generateImage*(opts: GraphOpts): Image =
             y -= yInc
             x = opts.xMin
             if opts.showProgress:
-                bar.inc(opts.width)
+                bar[0].inc(opts.width)
                 bar.update
 
         x += xInc
