@@ -1,5 +1,5 @@
 
-import math, pixie
+import math, pixie, progress
 import constants
 
 const BLACK = rgb(0, 0, 0).asRgbx
@@ -9,6 +9,7 @@ type
     GraphOpts* = object
         xMin*, xMax*, yMin*, yMax*, threshold*, maybeThreshold*: float
         width*, height*, subdivisions*: int
+        showProgress*: bool
 
 proc subpixelMatch(x: float, y: float, xInc: float, yInc: float, threshold: float, maybeThreshold: float, subdivisions: int): bool =
     let val = abs(graphFn(x, y))
@@ -47,6 +48,10 @@ proc generateImage*(opts: GraphOpts): Image =
     var x = opts.xMin
     var y = opts.yMax
 
+    var bar = newProgressBar(size, opts.width)
+    if opts.showProgress:
+        bar.start()
+
     for offset in countup(0, size - 1):
         image.data[offset] = case subpixelMatch(x, y, xInc, yInc, opts.threshold, opts.maybeThreshold, opts.subdivisions)
             of true: BLACK
@@ -55,7 +60,12 @@ proc generateImage*(opts: GraphOpts): Image =
         if offset mod opts.width == 0:
             y -= yInc
             x = opts.xMin
+            if opts.showProgress:
+                bar.increment()
 
         x += xInc
+
+    if opts.showProgress:
+        bar.finish()
 
     return image

@@ -6,6 +6,7 @@ import constants, benchmark, generator
 
 var parser = newParser:
     command("generate"):
+        # TODO: Make these parents. We can have benchmark overrides to test w/ different values.
         option("-x", "--xmin", "Minimum x value to plot", some($X_MIN))
         option("-X", "--xmax", "Maximum x value to plot", some($X_MAX))
         option("-y", "--ymin", "Minimum y value to plot", some($Y_MIN))
@@ -16,6 +17,7 @@ var parser = newParser:
         option("-w", "--width", "Width of the image to plot", some($1024))
         option("-h", "--height", "Height of the image to plot", some($1024))
         option("-o", "--output", "File name of the output image", some("output.png"))
+        flag("-p", "--showProgress", false, "Show the progress of the generation")
         run:
             let t0 = getTime()
             let o = GraphOpts(xMin : parseFloat(opts.xmin),
@@ -26,7 +28,8 @@ var parser = newParser:
                                 maybeThreshold : parseFloat(opts.maybeThreshold),
                                 subdivisions : parseInt(opts.subdivisions),
                                 width : parseInt(opts.width),
-                                height : parseInt(opts.height))
+                                height : parseInt(opts.height),
+                                showProgress : opts.showProgress)
 
             let image = generateImage(o)
             let delta = (getTime() - t0).inMilliseconds
