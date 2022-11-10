@@ -40,6 +40,8 @@ var parser = newParser:
         option("-h", "--height", "Height of the image to plot", some($1024))
         option("-o", "--output", "File name of the output image", some("output.png"))
         flag("-p", "--showProgress", false, "Show the progress of the generation")
+        flag("-T", "--threaded", false, "Use multithreaded implementation")
+
         run:
             let o = GraphOpts(xMin : parseFloat(opts.xmin),
                                 xMax : parseFloat(opts.xmax),
@@ -54,7 +56,9 @@ var parser = newParser:
 
             let t0 = getTime()
 
-            let image = generateImage(o)
+            let image = case opts.threaded
+                of true: generateImageThreaded(o)
+                else: generateImage(o)
 
             let delta = (getTime() - t0).inMilliseconds
             if not opts.showProgress:
