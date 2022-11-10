@@ -41,8 +41,8 @@ proc subpixelMatch(x: float, y: float, xInc: float, yInc: float, threshold: floa
     return false
 
 type ThreadData = ref object
-    y*, xInc*, yInc*: float
-    offsetY*: int
+    xMin*, yMax*, xInc*, yInc*: float
+    offsetStart*, offsetEnd*: int
     opts*: GraphOpts
     imageAddr*: ptr Image
     bar*: ptr SuruBarController
@@ -52,21 +52,70 @@ proc processRow(data: ThreadData) =
 
     var image = info.imageAddr[]
 
-    let offset = info.offsetY * info.opts.width
-    var x = info.opts.xMin
+    var x = info.xMin
+    var y = info.yMax
 
-    for offsetX in offset ..< offset + info.opts.width:
-        let clr = subpixelMatch(x, info.y, info.xInc, info.yInc, info.opts.threshold, info.opts.maybeThreshold, info.opts.subdivisions)
-        image.data[offsetX] = case clr
+    for offset in info.offsetStart ..< info.offsetEnd:
+        let clr = subpixelMatch(x, y, info.xInc, info.yInc, info.opts.threshold, info.opts.maybeThreshold, info.opts.subdivisions)
+
+        image.data[offset] = case clr
             of true: BLACK
             else: WHITE
 
-        if offsetX mod info.opts.width == info.opts.width - 1:
+        if offset mod info.opts.width == info.opts.width - 1:
             if info.opts.showProgress:
                 info.bar.inc(info.opts.width)
                 info.bar.update
 
+            y -= info.yInc
+            x = info.opts.xMin
+
         x += info.xInc
+
+proc generateImageThreaded*(opts: GraphOpts, tc: int = 10): Image =
+    var image = newImage(opts.width, opts.height)
+    let imageAddr = image.addr
+
+    let threadCount = min(tc, opts.height)
+
+    let size = opts.width * opts.height
+    let xInc: float = (opts.xMax - opts.xMin) / opts.width.float
+    let yInc: float = (opts.yMax - opts.yMin) / opts.height.float
+
+    var y = opts.yMax
+
+    var bar = initSuruBarThreaded()
+    bar[0].total = size
+
+    if opts.showProgress:
+        bar.setup()
+
+    var threads: seq[Thread[ThreadData]]
+    newSeq(threads, opts.height)
+
+    for offsetY in 0 ..< opts.height:
+        let data = ThreadData(
+            xMin: opts.xMin,
+            yMax: y,
+            xInc: xInc,
+            yInc: yInc,
+            offsetStart: offsetY * opts.width,
+            offsetEnd: (offsetY + 1) * opts.width,
+            opts: opts,
+            imageAddr: imageAddr,
+            bar: bar
+        )
+
+        threads[offsetY].createThread(processRow, data)
+        y -= yInc
+
+    joinThreads(threads)
+
+    if opts.showProgress:
+        bar.finish()
+        echo "Finished rendering image in ", bar[0].elapsed * 1000, " ms."
+
+    return image
 
 proc generateImage*(opts: GraphOpts): Image =
     var image = newImage(opts.width, opts.height)
@@ -97,48 +146,6 @@ proc generateImage*(opts: GraphOpts): Image =
                 bar.update
 
         x += xInc
-
-    if opts.showProgress:
-        bar.finish()
-        echo "Finished rendering image in ", bar[0].elapsed * 1000, " ms."
-
-    return image
-
-proc generateImageThreaded*(opts: GraphOpts): Image =
-    var image = newImage(opts.width, opts.height)
-    let imageAddr = image.addr
-
-    let size = opts.width * opts.height
-    let xInc: float = (opts.xMax - opts.xMin) / opts.width.float
-    let yInc: float = (opts.yMax - opts.yMin) / opts.height.float
-
-    var x = opts.xMin
-    var y = opts.yMax
-
-    var bar = initSuruBarThreaded()
-    bar[0].total = size
-
-    if opts.showProgress:
-        bar.setup()
-
-    var threads: seq[Thread[ThreadData]]
-    newSeq(threads, opts.height)
-
-    for offsetY in 0 ..< opts.height:
-        let data = ThreadData(
-            offsetY: offsetY,
-            y: y,
-            xInc: xInc,
-            yInc: yInc,
-            opts: opts,
-            imageAddr: imageAddr,
-            bar: bar
-        )
-
-        threads[offsetY].createThread(processRow, data)
-        y -= yInc
-
-    joinThreads(threads)
 
     if opts.showProgress:
         bar.finish()
