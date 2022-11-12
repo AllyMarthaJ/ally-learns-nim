@@ -1,5 +1,5 @@
 
-import math, pixie, suru, strformat, sugar
+import math, pixie, suru
 import constants
 
 const BLACK = rgb(0, 0, 0).asRgbx
