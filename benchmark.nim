@@ -28,17 +28,6 @@ proc benchmarkGraphGen[T](testValues: seq[T], optGenerator: (T) -> GenResult) =
 
         echo fmt"#{i} {prettyGen} yields average {average} ms with stdDev of {stdDev} ms."
 
-
-            # let opts = GraphOpts(xMin : X_MIN,
-            #                     xMax : X_MAX,
-            #                     yMin : Y_MIN,
-            #                     yMax : Y_MAX,
-            #                     threshold : THRESHOLD,
-            #                     maybeThreshold : MAYBE_THRESHOLD,
-            #                     subdivisions : 0,
-            #                     width : 2^exponent,
-            #                     height : 2^exponent)
-
 proc resolutionGenerator(iteration: int): GenResult =
     GenResult(
         prettyStr : fmt"Resolution {2^iteration} x {2^iteration}",

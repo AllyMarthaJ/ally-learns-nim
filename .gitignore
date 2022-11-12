@@ -12,4 +12,6 @@
 *.vsix
 
 bin/*
+bin
 suru/*
+suru
