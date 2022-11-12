@@ -70,8 +70,11 @@ var parser = newParser:
 
     command("benchmark"):
         flag("-r", "--resolution")
+        flag("-t", "--threads")
         run:
             if opts.resolution:
                 benchmarkGraphResolution()
+            if opts.threads:
+                benchmarkThreads()
 
 parser.run(commandLineParams())
