@@ -18,3 +18,10 @@ const Y_MAX*: float = 1
 
 const THRESHOLD*: float = 10.float.pow(-4)
 const MAYBE_THRESHOLD*: float = 10.float.pow(-1)
+
+const SUBDIVISIONS*: int = 1
+
+const WIDTH*: int = 1024
+const HEIGHT*: int = 1024
+
+const THREAD_COUNT*: int = 1

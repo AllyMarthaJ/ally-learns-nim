@@ -26,6 +26,8 @@
 import times, pixie, os, argparse, strformat
 import bgraph / [constants, benchmark, generator]
 
+export constants, benchmark, generator
+
 var parser = newParser:
     option("-x", "--xmin", "Minimum x value to plot", some($X_MIN))
     option("-X", "--xmax", "Maximum x value to plot", some($X_MAX))
@@ -36,10 +38,10 @@ var parser = newParser:
     option("-m", "--maybeThreshold", "Threshold at which to flag subdivision to search for potential zeroes",
             some($MAYBE_THRESHOLD))
     option("-s", "--subdivisions", "Number of subdivisions to do to find zeroes",
-            some($0))
-    option("-w", "--width", "Width of the image to plot", some($1024))
-    option("-h", "--height", "Height of the image to plot", some($1024))
-    option("-tc", "--threadCount", "Number of threads to use.", some($1))
+            some($SUBDIVISIONS))
+    option("-w", "--width", "Width of the image to plot", some($WIDTH))
+    option("-h", "--height", "Height of the image to plot", some($HEIGHT))
+    option("-tc", "--threadCount", "Number of threads to use.", some($THREAD_COUNT))
     flag("-p", "--showProgress", false, "Show the progress of the generation")
 
     command("generate"):
