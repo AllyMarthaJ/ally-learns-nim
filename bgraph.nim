@@ -24,7 +24,7 @@
 #   A difference of 10^2 or 10^3 between threshold and maybeThreshold should be sufficient.
 
 import times, pixie, os, argparse, strformat
-import constants, benchmark, generator
+import bgraph / [constants, benchmark, generator]
 
 var parser = newParser:
     option("-x", "--xmin", "Minimum x value to plot", some($X_MIN))
