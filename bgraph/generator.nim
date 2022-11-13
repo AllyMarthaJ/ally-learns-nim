@@ -4,8 +4,6 @@ import constants
 const BLACK = rgb(0, 0, 0).asRgbx
 const WHITE = rgb(255, 255, 255).asRgbx
 
-{.experimental: "parallel".}
-
 type
     GraphOpts* = object
         xMin*, xMax*, yMin*, yMax*, threshold*, maybeThreshold*: float
