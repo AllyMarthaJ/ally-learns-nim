@@ -26,7 +26,7 @@
 import times, pixie, os, argparse, strformat
 import bgraph / [constants, benchmark, generator]
 
-export constants, benchmark, generator
+export generator
 
 var parser = newParser:
     option("-x", "--xmin", "Minimum x value to plot", some($X_MIN))
