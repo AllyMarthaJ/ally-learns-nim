@@ -15,3 +15,7 @@ bin/*
 bin
 suru/*
 suru
+
+# I test stuff
+output.png
+profile_results.txt
