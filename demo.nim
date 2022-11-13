@@ -31,9 +31,12 @@ var parser = newParser:
     option("-X", "--xmax", "Maximum x value to plot", some($X_MAX))
     option("-y", "--ymin", "Minimum y value to plot", some($Y_MIN))
     option("-Y", "--ymax", "Maximum y value to plot", some($Y_MAX))
-    option("-t", "--threshold", "Threshold at which to flag a zero at immediately", some($THRESHOLD))
-    option("-m", "--maybeThreshold", "Threshold at which to flag subdivision to search for potential zeroes", some($MAYBE_THRESHOLD))
-    option("-s", "--subdivisions", "Number of subdivisions to do to find zeroes", some($0))
+    option("-t", "--threshold", "Threshold at which to flag a zero at immediately",
+            some($THRESHOLD))
+    option("-m", "--maybeThreshold", "Threshold at which to flag subdivision to search for potential zeroes",
+            some($MAYBE_THRESHOLD))
+    option("-s", "--subdivisions", "Number of subdivisions to do to find zeroes",
+            some($0))
     option("-w", "--width", "Width of the image to plot", some($1024))
     option("-h", "--height", "Height of the image to plot", some($1024))
     option("-tc", "--threadCount", "Number of threads to use.", some($1))
@@ -45,17 +48,20 @@ var parser = newParser:
         flag("-O", "--openOutput", false, "Open the output file when complete")
 
         run:
-            let o = GraphOpts(xMin : parseFloat(opts.parentOpts.xmin),
-                                xMax : parseFloat(opts.parentOpts.xmax),
-                                yMin : parseFloat(opts.parentOpts.ymin),
-                                yMax : parseFloat(opts.parentOpts.ymax),
-                                threshold : parseFloat(opts.parentOpts.threshold),
-                                maybeThreshold : parseFloat(opts.parentOpts.maybeThreshold),
-                                subdivisions : parseInt(opts.parentOpts.subdivisions),
-                                width : parseInt(opts.parentOpts.width),
-                                height : parseInt(opts.parentOpts.height),
-                                showProgress : opts.parentOpts.showProgress,
-                                threads : parseInt(opts.parentOpts.threadCount))
+            let o = GraphOpts(xMin: parseFloat(opts.parentOpts.xmin),
+                                xMax: parseFloat(opts.parentOpts.xmax),
+                                yMin: parseFloat(opts.parentOpts.ymin),
+                                yMax: parseFloat(opts.parentOpts.ymax),
+                                threshold: parseFloat(
+                                        opts.parentOpts.threshold),
+                                maybeThreshold: parseFloat(
+                                        opts.parentOpts.maybeThreshold),
+                                subdivisions: parseInt(
+                                        opts.parentOpts.subdivisions),
+                                width: parseInt(opts.parentOpts.width),
+                                height: parseInt(opts.parentOpts.height),
+                                showProgress: opts.parentOpts.showProgress,
+                                threads: parseInt(opts.parentOpts.threadCount))
 
             let t0 = getTime()
 
@@ -73,24 +79,27 @@ var parser = newParser:
                 try:
                     discard execShellCmd(fmt"open {opts.output}")
                 except:
-                    echo "Couldn't open the output file, ", getCurrentExceptionMsg()
+                    echo "Couldn't open the output file, ",
+                            getCurrentExceptionMsg()
 
     command("benchmark"):
         flag("-r", "--resolution")
         flag("-t", "--threads")
 
         run:
-            let o = GraphOpts(xMin : parseFloat(opts.parentOpts.xmin),
-                            xMax : parseFloat(opts.parentOpts.xmax),
-                            yMin : parseFloat(opts.parentOpts.ymin),
-                            yMax : parseFloat(opts.parentOpts.ymax),
-                            threshold : parseFloat(opts.parentOpts.threshold),
-                            maybeThreshold : parseFloat(opts.parentOpts.maybeThreshold),
-                            subdivisions : parseInt(opts.parentOpts.subdivisions),
-                            width : parseInt(opts.parentOpts.width),
-                            height : parseInt(opts.parentOpts.height),
-                            showProgress : opts.parentOpts.showProgress,
-                            threads : parseInt(opts.parentOpts.threadCount))
+            let o = GraphOpts(xMin: parseFloat(opts.parentOpts.xmin),
+                            xMax: parseFloat(opts.parentOpts.xmax),
+                            yMin: parseFloat(opts.parentOpts.ymin),
+                            yMax: parseFloat(opts.parentOpts.ymax),
+                            threshold: parseFloat(opts.parentOpts.threshold),
+                            maybeThreshold: parseFloat(
+                                    opts.parentOpts.maybeThreshold),
+                            subdivisions: parseInt(
+                                    opts.parentOpts.subdivisions),
+                            width: parseInt(opts.parentOpts.width),
+                            height: parseInt(opts.parentOpts.height),
+                            showProgress: opts.parentOpts.showProgress,
+                            threads: parseInt(opts.parentOpts.threadCount))
             if opts.resolution:
                 benchmarkGraphResolution(o)
             if opts.threads:

@@ -1,7 +1,8 @@
 import generator
 import times, sugar, strformat, sequtils, stats, math
 
-proc benchmarkGraphGen[T](name: string, testValues: seq[T], baseOpts: GraphOpts, optGenerator: (GraphOpts, T) -> GraphOpts) =
+proc benchmarkGraphGen[T](name: string, testValues: seq[T], baseOpts: GraphOpts,
+        optGenerator: (GraphOpts, T) -> GraphOpts) =
     echo fmt"Testing {name}"
 
     for i, variation in testValues:
@@ -29,32 +30,32 @@ proc benchmarkGraphGen[T](name: string, testValues: seq[T], baseOpts: GraphOpts,
 
 proc resolutionGenerator(baseOpts: GraphOpts, iteration: int): GraphOpts =
     GraphOpts(
-        xMin : baseOpts.xMin,
-        xMax : baseOpts.xMax,
-        yMin : baseOpts.yMin,
-        yMax : baseOpts.yMax,
-        threshold : baseOpts.threshold,
-        maybeThreshold : baseOpts.maybeThreshold,
-        subdivisions : baseOpts.subdivisions,
-        threads : baseOpts.threads,
-        showProgress : baseOpts.showProgress,
-        width : 2^iteration,
-        height : 2^iteration
+        xMin: baseOpts.xMin,
+        xMax: baseOpts.xMax,
+        yMin: baseOpts.yMin,
+        yMax: baseOpts.yMax,
+        threshold: baseOpts.threshold,
+        maybeThreshold: baseOpts.maybeThreshold,
+        subdivisions: baseOpts.subdivisions,
+        threads: baseOpts.threads,
+        showProgress: baseOpts.showProgress,
+        width: 2^iteration,
+        height: 2^iteration
     )
 
 proc threadGenerator(baseOpts: GraphOpts, iteration: int): GraphOpts =
     GraphOpts(
-        xMin : baseOpts.xMin,
-        xMax : baseOpts.xMax,
-        yMin : baseOpts.yMin,
-        yMax : baseOpts.yMax,
-        threshold : baseOpts.threshold,
-        maybeThreshold : baseOpts.maybeThreshold,
-        subdivisions : baseOpts.subdivisions,
-        threads : 2^iteration,
-        showProgress : baseOpts.showProgress,
-        width : baseOpts.width,
-        height : baseOpts.height
+        xMin: baseOpts.xMin,
+        xMax: baseOpts.xMax,
+        yMin: baseOpts.yMin,
+        yMax: baseOpts.yMax,
+        threshold: baseOpts.threshold,
+        maybeThreshold: baseOpts.maybeThreshold,
+        subdivisions: baseOpts.subdivisions,
+        threads: 2^iteration,
+        showProgress: baseOpts.showProgress,
+        width: baseOpts.width,
+        height: baseOpts.height
     )
 
 proc benchmarkGraphResolution*(baseOpts: GraphOpts) =

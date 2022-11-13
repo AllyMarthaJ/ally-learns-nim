@@ -16,6 +16,11 @@
                 "cwd": "${workspaceRoot}"
             },
             "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

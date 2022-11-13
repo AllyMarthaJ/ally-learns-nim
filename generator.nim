@@ -5,7 +5,7 @@ import constants
 const BLACK = rgb(0, 0, 0).asRgbx
 const WHITE = rgb(255, 255, 255).asRgbx
 
-{.experimental:"parallel".}
+{.experimental: "parallel".}
 
 type
     GraphOpts* = object
@@ -13,7 +13,8 @@ type
         width*, height*, subdivisions*, threads*: int
         showProgress*: bool
 
-proc subpixelMatch(x: float, y: float, xInc: float, yInc: float, threshold: float, maybeThreshold: float, subdivisions: int): bool =
+proc subpixelMatch(x: float, y: float, xInc: float, yInc: float,
+        threshold: float, maybeThreshold: float, subdivisions: int): bool =
     let val = abs(graphFn(x, y))
 
     if val <= threshold:
@@ -56,7 +57,8 @@ proc processRow(data: ThreadData) =
     var y = info.yMax
 
     for offset in info.offsetStart ..< info.offsetEnd:
-        let clr = subpixelMatch(x, y, info.xInc, info.yInc, info.opts.threshold, info.opts.maybeThreshold, info.opts.subdivisions)
+        let clr = subpixelMatch(x, y, info.xInc, info.yInc, info.opts.threshold,
+                info.opts.maybeThreshold, info.opts.subdivisions)
 
         image.data[offset] = case clr
             of true: BLACK
@@ -152,7 +154,8 @@ proc generateImage*(opts: GraphOpts): Image =
         bar.setup()
 
     for offset in 0 ..< size:
-        image.data[offset] = case subpixelMatch(x, y, xInc, yInc, opts.threshold, opts.maybeThreshold, opts.subdivisions)
+        image.data[offset] = case subpixelMatch(x, y, xInc, yInc,
+                opts.threshold, opts.maybeThreshold, opts.subdivisions)
             of true: BLACK
             else: WHITE
 
