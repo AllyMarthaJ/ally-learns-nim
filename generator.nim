@@ -10,7 +10,7 @@ const WHITE = rgb(255, 255, 255).asRgbx
 type
     GraphOpts* = object
         xMin*, xMax*, yMin*, yMax*, threshold*, maybeThreshold*: float
-        width*, height*, subdivisions*: int
+        width*, height*, subdivisions*, threads*: int
         showProgress*: bool
 
 proc subpixelMatch(x: float, y: float, xInc: float, yInc: float, threshold: float, maybeThreshold: float, subdivisions: int): bool =
@@ -72,11 +72,11 @@ proc processRow(data: ThreadData) =
 
         x += info.xInc
 
-proc generateImageThreaded*(opts: GraphOpts, tc: int = 24): Image =
+proc generateImageThreaded*(opts: GraphOpts): Image =
     var image = newImage(opts.width, opts.height)
     let imageAddr = image.addr
 
-    let threadCount = min(tc, opts.height)
+    let threadCount = min(opts.threads, opts.height)
     let threadSize = opts.height.div(threadCount)
     let remaining = opts.height - threadSize * threadCount
 

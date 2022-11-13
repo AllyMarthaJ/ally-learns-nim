@@ -27,54 +27,73 @@ import times, pixie, os, argparse, strformat
 import constants, benchmark, generator
 
 var parser = newParser:
+    option("-x", "--xmin", "Minimum x value to plot", some($X_MIN))
+    option("-X", "--xmax", "Maximum x value to plot", some($X_MAX))
+    option("-y", "--ymin", "Minimum y value to plot", some($Y_MIN))
+    option("-Y", "--ymax", "Maximum y value to plot", some($Y_MAX))
+    option("-t", "--threshold", "Threshold at which to flag a zero at immediately", some($THRESHOLD))
+    option("-m", "--maybeThreshold", "Threshold at which to flag subdivision to search for potential zeroes", some($MAYBE_THRESHOLD))
+    option("-s", "--subdivisions", "Number of subdivisions to do to find zeroes", some($0))
+    option("-w", "--width", "Width of the image to plot", some($1024))
+    option("-h", "--height", "Height of the image to plot", some($1024))
+    option("-tc", "--threadCount", "Number of threads to use.", some($1))
+    flag("-p", "--showProgress", false, "Show the progress of the generation")
+
     command("generate"):
         # TODO: Make these parents. We can have benchmark overrides to test w/ different values.
-        option("-x", "--xmin", "Minimum x value to plot", some($X_MIN))
-        option("-X", "--xmax", "Maximum x value to plot", some($X_MAX))
-        option("-y", "--ymin", "Minimum y value to plot", some($Y_MIN))
-        option("-Y", "--ymax", "Maximum y value to plot", some($Y_MAX))
-        option("-t", "--threshold", "Threshold at which to flag a zero at immediately", some($THRESHOLD))
-        option("-m", "--maybeThreshold", "Threshold at which to flag subdivision to search for potential zeroes", some($MAYBE_THRESHOLD))
-        option("-s", "--subdivisions", "Number of subdivisions to do to find zeroes", some($0))
-        option("-w", "--width", "Width of the image to plot", some($1024))
-        option("-h", "--height", "Height of the image to plot", some($1024))
         option("-o", "--output", "File name of the output image", some("output.png"))
-        flag("-p", "--showProgress", false, "Show the progress of the generation")
-        option("-tc", "--threadCount", "Number of threads to use.", some($1))
+        flag("-O", "--openOutput", false, "Open the output file when complete")
 
         run:
-            let o = GraphOpts(xMin : parseFloat(opts.xmin),
-                                xMax : parseFloat(opts.xmax),
-                                yMin : parseFloat(opts.ymin),
-                                yMax : parseFloat(opts.ymax),
-                                threshold : parseFloat(opts.threshold),
-                                maybeThreshold : parseFloat(opts.maybeThreshold),
-                                subdivisions : parseInt(opts.subdivisions),
-                                width : parseInt(opts.width),
-                                height : parseInt(opts.height),
-                                showProgress : opts.showProgress)
+            let o = GraphOpts(xMin : parseFloat(opts.parentOpts.xmin),
+                                xMax : parseFloat(opts.parentOpts.xmax),
+                                yMin : parseFloat(opts.parentOpts.ymin),
+                                yMax : parseFloat(opts.parentOpts.ymax),
+                                threshold : parseFloat(opts.parentOpts.threshold),
+                                maybeThreshold : parseFloat(opts.parentOpts.maybeThreshold),
+                                subdivisions : parseInt(opts.parentOpts.subdivisions),
+                                width : parseInt(opts.parentOpts.width),
+                                height : parseInt(opts.parentOpts.height),
+                                showProgress : opts.parentOpts.showProgress,
+                                threads : parseInt(opts.parentOpts.threadCount))
 
             let t0 = getTime()
 
-            let image = case opts.threadCount
+            let image = case opts.parentOpts.threadCount
                 of $0: generateImage(o)
                 of $1: generateImage(o)
-                else: generateImageThreaded(o, parseInt(opts.threadCount))
+                else: generateImageThreaded(o)
 
             let delta = (getTime() - t0).inMilliseconds
-            if not opts.showProgress:
+            if not opts.parentOpts.showProgress:
                 echo "Finished rendering image in ", delta, " ms."
 
             image.writeFile(opts.output)
-            discard execShellCmd(fmt"open {opts.output}")
+            if opts.openOutput:
+                try:
+                    discard execShellCmd(fmt"open {opts.output}")
+                except:
+                    echo "Couldn't open the output file, ", getCurrentExceptionMsg()
 
     command("benchmark"):
         flag("-r", "--resolution")
         flag("-t", "--threads")
+
         run:
+            let o = GraphOpts(xMin : parseFloat(opts.parentOpts.xmin),
+                            xMax : parseFloat(opts.parentOpts.xmax),
+                            yMin : parseFloat(opts.parentOpts.ymin),
+                            yMax : parseFloat(opts.parentOpts.ymax),
+                            threshold : parseFloat(opts.parentOpts.threshold),
+                            maybeThreshold : parseFloat(opts.parentOpts.maybeThreshold),
+                            subdivisions : parseInt(opts.parentOpts.subdivisions),
+                            width : parseInt(opts.parentOpts.width),
+                            height : parseInt(opts.parentOpts.height),
+                            showProgress : opts.parentOpts.showProgress,
+                            threads : parseInt(opts.parentOpts.threadCount))
             if opts.resolution:
-                benchmarkGraphResolution()
+                benchmarkGraphResolution(o)
             if opts.threads:
-                benchmarkThreads()
+                benchmarkThreads(o)
 
 parser.run(commandLineParams())
