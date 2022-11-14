@@ -19,11 +19,13 @@ proc subpixelMatch(x: float, y: float, xInc: float, yInc: float,
     let normX = x*invMag
     let normY = y*invMag
 
-    let delX = graphFn(x + xInc, y)
-    let delY = graphFn(x, y + yInc)
+    let del = 1e-12
+    let delX = (graphFn(x + del, y) - val)/del
+    let delY = (graphFn(x, y + del) - val)/del
 
-    # directional derivative
-    return abs(delX * normX + delY * normY)
+    let steepest = sqrt(delX^2 + delY^2)
+
+    return steepest
 
 type ThreadData = ref object
     xMin*, yMax*, xInc*, yInc*: float

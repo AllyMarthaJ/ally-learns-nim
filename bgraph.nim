@@ -84,7 +84,7 @@ var parser = newParser:
                 xInc: 0.05,
                 yInc: 0.05
             )
-            decorateGraph(data, o, image.unsafeAddr)
+            # decorateGraph(data, o, image.unsafeAddr)
 
             image.writeFile(opts.output)
             if opts.openOutput:
