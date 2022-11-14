@@ -27,7 +27,7 @@ proc decorateGraph*(gData: DataOpts, gOpts: GraphOpts, img: ptr Image) =
     imgContext.lineWidth = 20
 
     let optionalXAxisPoint = getTAxis(gOpts.xMin, gOpts.xMax, gOpts.width)
-    let optionalYAxisPoint = getTAxis(gOpts.yMin, gOpts.yMax, gOpts.height)
+    let optionalYAxisPoint = getTAxis(gOpts.yMax, gOpts.yMin, gOpts.height)
 
     if gData.showXAxis and optionalXAxisPoint.isSome:
         let xAxisPoint: float = optionalXAxisPoint.get
