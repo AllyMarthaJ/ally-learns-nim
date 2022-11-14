@@ -5,7 +5,8 @@ type DataOpts* = ref object
     showXAxis*, showYAxis*, showXGrid*, showYGrid*: bool
     xInc*, yInc*: float
 
-proc createLerp(x0: float, y0: float, x1: float, y1: float): proc(x: float): float =
+proc createLerp(x0: float, y0: float, x1: float, y1: float): proc(
+        x: float): float =
     let lCoeff = (y1 - y0) / (x1 - x0)
     return proc(x: float): float =
         y0 + lCoeff * (x - x0)
@@ -30,11 +31,13 @@ proc decorateGraph*(gData: DataOpts, gOpts: GraphOpts, img: ptr Image) =
 
     if gData.showXAxis and optionalXAxisPoint.isSome:
         let xAxisPoint: float = optionalXAxisPoint.get
-        imgContext.strokeSegment(segment(vec2(xAxisPoint, 0), vec2(xAxisPoint, gOpts.height.float)))
+        imgContext.strokeSegment(segment(vec2(xAxisPoint, 0), vec2(xAxisPoint,
+                gOpts.height.float)))
 
     if gData.showYAxis and optionalYAxisPoint.isSome:
         let yAxisPoint: float = optionalYAxisPoint.get
-        imgContext.strokeSegment(segment(vec2(0, yAxisPoint), vec2(gOpts.width.float, yAxisPoint)))
+        imgContext.strokeSegment(segment(vec2(0, yAxisPoint), vec2(
+                gOpts.width.float, yAxisPoint)))
 
     imgContext.strokeStyle = "#FF0000"
     imgContext.lineWidth = 1
@@ -46,14 +49,16 @@ proc decorateGraph*(gData: DataOpts, gOpts: GraphOpts, img: ptr Image) =
         while x > 0:
             x -= coordXInc
 
-            imgContext.strokeSegment(segment(vec2(x, 0), vec2(x, gOpts.height.float)))
+            imgContext.strokeSegment(segment(vec2(x, 0), vec2(x,
+                    gOpts.height.float)))
 
         x = optionalXAxisPoint.get
 
         while x < gOpts.width.float:
             x += coordXInc
 
-            imgContext.strokeSegment(segment(vec2(x, 0), vec2(x, gOpts.height.float)))
+            imgContext.strokeSegment(segment(vec2(x, 0), vec2(x,
+                    gOpts.height.float)))
 
     if gData.showYGrid and optionalYAxisPoint.isSome:
         var y: float = optionalYAxisPoint.get
