@@ -11,32 +11,19 @@ type
         showProgress*: bool
 
 proc subpixelMatch(x: float, y: float, xInc: float, yInc: float,
-        threshold: float, maybeThreshold: float, subdivisions: int): bool =
-    let val = abs(graphFn(x, y))
+        threshold: float, maybeThreshold: float, subdivisions: int): float =
+    let val = graphFn(x, y)
 
-    if val <= threshold:
-        return true
+    let invMag = 1/sqrt(x^2+y^2)
 
-    if subdivisions == 0 or val > maybeThreshold:
-        return false
+    let normX = x*invMag
+    let normY = y*invMag
 
-    let uInc: float = xInc / subdivisions.float
-    let vInc: float = yInc / subdivisions.float
+    let delX = graphFn(x + xInc, y)
+    let delY = graphFn(x, y + yInc)
 
-    var u = x
-    var v = y + yInc
-
-    for offset in 0 ..< subdivisions^2:
-        if abs(graphFn(u, v)) <= threshold:
-            return true
-
-        if offset mod subdivisions == 0:
-            v -= vInc
-            u = x
-
-        u += uInc
-
-    return false
+    # directional derivative
+    return abs(delX * normX + delY * normY)
 
 type ThreadData = ref object
     xMin*, yMax*, xInc*, yInc*: float
@@ -57,9 +44,7 @@ proc processRow(data: ThreadData) =
         let clr = subpixelMatch(x, y, info.xInc, info.yInc, info.opts.threshold,
                 info.opts.maybeThreshold, info.opts.subdivisions)
 
-        image.data[offset] = case clr
-            of true: BLACK
-            else: WHITE
+        image.data[offset] = color(clr, clr, clr, 1.0).asRgbx
 
         if offset mod info.opts.width == info.opts.width - 1:
             if info.opts.showProgress:
@@ -151,10 +136,8 @@ proc generateImage*(opts: GraphOpts): Image =
         bar.setup()
 
     for offset in 0 ..< size:
-        image.data[offset] = case subpixelMatch(x, y, xInc, yInc,
-                opts.threshold, opts.maybeThreshold, opts.subdivisions)
-            of true: BLACK
-            else: WHITE
+        let clr = subpixelMatch(x, y, xInc, yInc, opts.threshold, opts.maybeThreshold, opts.subdivisions)
+        image.data[offset] = color(clr, clr, clr, 1.0).asRgbx
 
         if offset mod opts.width == 0:
             y -= yInc
