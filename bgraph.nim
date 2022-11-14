@@ -24,7 +24,7 @@
 #   A difference of 10^2 or 10^3 between threshold and maybeThreshold should be sufficient.
 
 import times, pixie, os, argparse, strformat
-import bgraph / [constants, benchmark, generator]
+import bgraph / [constants, benchmark, generator, decorator]
 
 export generator
 
@@ -75,6 +75,16 @@ var parser = newParser:
             let delta = (getTime() - t0).inMilliseconds
             if not opts.parentOpts.showProgress:
                 echo "Finished rendering image in ", delta, " ms."
+
+            let data: DataOpts = DataOpts(
+                showXAxis: true,
+                showYAxis: true,
+                showXGrid: true,
+                showYGrid: true,
+                xInc: 0.05,
+                yInc: 0.05
+            )
+            decorateGraph(data, o, image.unsafeAddr)
 
             image.writeFile(opts.output)
             if opts.openOutput:
