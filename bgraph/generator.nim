@@ -25,7 +25,11 @@ proc subpixelMatch(x: float, y: float, xInc: float, yInc: float,
 
     let steepest = sqrt(delX^2 + delY^2)
 
-    return steepest
+    if steepest >= 1:
+        return 1/steepest
+    else:
+        return steepest
+
 
 type ThreadData = ref object
     xMin*, yMax*, xInc*, yInc*: float
