@@ -1,9 +1,10 @@
-import pixie, std/options
-import generator
+import pixie, std/options, strformat
+import generator, constants
 
 type DataOpts* = ref object
-    showXAxis*, showYAxis*, showXGrid*, showYGrid*: bool
-    xInc*, yInc*: float
+    showXAxis*, showYAxis*, showXGrid*, showYGrid*, showAttribution*: bool
+    xInc*, yInc*, axisWidth*, gridWidth*: float
+    fontFile*, axisColor*, gridColor*, author*: string
 
 proc createLerp(x0: float, y0: float, x1: float, y1: float): proc(
         x: float): float =
@@ -21,10 +22,17 @@ proc getTAxis(tMin: float, tMax: float, size: int): Option[float] =
 
     return some(lerpValue)
 
+proc newFont(tf: Typeface, size: float32, color: Color): Font =
+    result = newFont(tf)
+    result.size = size
+    result.paint.color = color
+
 proc decorateGraph*(gData: DataOpts, gOpts: GraphOpts, img: ptr Image) =
     let imgContext = newContext(img[])
-    imgContext.strokeStyle = "#FF0000"
-    imgContext.lineWidth = 20
+
+    # Axes
+    imgContext.strokeStyle = gData.axisColor
+    imgContext.lineWidth = gData.axisWidth
 
     let optionalXAxisPoint = getTAxis(gOpts.xMin, gOpts.xMax, gOpts.width)
     let optionalYAxisPoint = getTAxis(gOpts.yMax, gOpts.yMin, gOpts.height)
@@ -39,8 +47,9 @@ proc decorateGraph*(gData: DataOpts, gOpts: GraphOpts, img: ptr Image) =
         imgContext.strokeSegment(segment(vec2(0, yAxisPoint), vec2(
                 gOpts.width.float, yAxisPoint)))
 
-    imgContext.strokeStyle = "#FF0000"
-    imgContext.lineWidth = 1
+    # Grids
+    imgContext.strokeStyle = gData.gridColor
+    imgContext.lineWidth = gData.gridWidth
 
     if gData.showXGrid and optionalXAxisPoint.isSome:
         var x: float = optionalXAxisPoint.get
@@ -75,3 +84,23 @@ proc decorateGraph*(gData: DataOpts, gOpts: GraphOpts, img: ptr Image) =
             y += coordYInc
 
             imgContext.strokeSegment(segment(vec2(0, y), vec2(gOpts.width.float, y)))
+
+    # Attribution
+    let tf = readTypeface(gData.fontFile)
+
+    let fontFactor = 0.01
+    let baseSize = fontFactor * gOpts.height.float
+    let spans = @[
+        newSpan(&"{gData.author}\n", newFont(tf, 2 * baseSize, color(0, 0, 0))),
+        newSpan(&"{GRAPH_FN_NAME}\n", newFont(tf, baseSize, color(0, 0, 0))),
+        newSpan(&"\nDomain: ({gOpts.xMin}, {gOpts.xMax})x({gOpts.yMin}, {gOpts.yMax})\n", newFont(tf, baseSize, color(0, 0, 0))),
+        newSpan(&"Dimensions: {gOpts.width}x{gOpts.height}\n", newFont(tf, baseSize, color(0, 0, 0))),
+        newSpan(&"Thresholds: {gOpts.threshold}, {gOpts.maybeThreshold}", newFont(tf, baseSize, color(0, 0, 0))),
+        newSpan(&"Subdivisions: {gOpts.subdivisions}", newFont(tf, baseSize, color(0, 0, 0))),
+    ]
+    let spanArrangement = typeset(spans)
+
+    imgContext.fillStyle = color(0,0,0,0.1)
+    imgContext.fillRect(rect(10, 10, spanArrangement.layoutBounds.x, spanArrangement.layoutBounds.y))
+
+    img[].fillText(spanArrangement, translate(vec2(10, 10)))

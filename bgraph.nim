@@ -81,10 +81,18 @@ var parser = newParser:
                 showYAxis: true,
                 showXGrid: true,
                 showYGrid: true,
-                xInc: 0.05,
-                yInc: 0.05
+                showAttribution: true,
+                xInc: 0.1,
+                yInc: 0.1,
+                fontFile: "bin/ComicCode-Medium.otf",
+                axisColor: "#000000",
+                axisWidth: 20,
+                gridColor: "#000000",
+                gridWidth: 1,
+                author: "Ally",
+
             )
-            decorateGraph(data, o, image.unsafeAddr)
+            # decorateGraph(data, o, image.unsafeAddr)
 
             image.writeFile(opts.output)
             if opts.openOutput:
